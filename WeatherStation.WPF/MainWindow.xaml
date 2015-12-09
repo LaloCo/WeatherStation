@@ -1,0 +1,52 @@
+﻿<Window x:Class="WeatherStation.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:WeatherStation.WPF.Model"
+        Title="Weather Station" Height="350" Width="525">
+    
+    <Window.Resources>
+        <m:WeatherControl x:Key="weather"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="currentDataContainer"
+                        DataContext="{Binding Source={StaticResource weather}}"
+                        VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="20">
+                <TextBlock x:Name="lblTemperature"
+                       Text="{Binding TemperatureC, StringFormat={}{0}°C}"
+                       FontFamily="Segoe UI Light"
+                       FontSize="60"/>
+                <TextBlock x:Name="lblHumidity"
+                       Text="{Binding Humidity, StringFormat={}{0}%}"
+                       FontFamily="Segoe UI Light"
+                       FontSize="30"/>
+                <TextBlock x:Name="lblDewPoint"
+                       Text="{Binding DewPoint, StringFormat={}{0}°C}"
+                       FontFamily="Segoe UI Light"
+                       FontSize="30"/>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                
+            </Grid>
+        </Grid>
+        <TextBlock x:Name="lblState"
+                   TextAlignment="Right"
+                   Margin="20 10"
+                   Grid.Row="1"
+                   Text="Reading data from local weather center."
+                   FontFamily="Segoe UI"
+                   TextWrapping="Wrap"/>
+    </Grid>
+    
+</Window>
